@@ -1,7 +1,5 @@
 # WpfHostApi
 
-## Description
-
 Host an API within a WPF application using GenericHost of net5
 
 - When the application is launched it opens as a tray app
