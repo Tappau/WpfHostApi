@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WpfHostApi.Core;
 
 namespace WpfHostApi
 {
@@ -15,10 +16,12 @@ namespace WpfHostApi
     [ExcludeFromCodeCoverage]
     public partial class App : Application
     {
+        private readonly WindowExceptionHandler _windowExceptionHandler;
         private readonly IHost _host;
 
         public App()
         {
+            _windowExceptionHandler = new WindowExceptionHandler();
             _host = Host.CreateDefaultBuilder()
                 .ConfigureAppConfiguration((context, builder) =>
                 {

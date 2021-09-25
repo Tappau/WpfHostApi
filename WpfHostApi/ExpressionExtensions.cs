@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Runtime.ExceptionServices;
+using System.Windows;
 
 namespace WpfHostApi
 {
-    public static class ExpressionExtensions
+    public static class Extensions
     {
         public static string NameForProperty<TDelegate>(this Expression<TDelegate> propertyExpression)
         {
@@ -17,6 +19,14 @@ namespace WpfHostApi
             }
 
             return member.Member.Name;
+        }
+
+        public static void ThrowOnDispatcher(this Exception e)
+        {
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                ExceptionDispatchInfo.Capture(e).Throw();
+            }));
         }
     }
 }
